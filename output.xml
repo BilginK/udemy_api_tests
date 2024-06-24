@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.0.1 (Python 3.12.4 on win32)" generated="2024-06-24T13:51:35.548396" rpa="false" schemaversion="5">
+<suite id="s1" name="Verify Login" source="c:\Users\Bilgin\Projeler\udemy_api_tests\tests\api\endpoints\login\verify_login.robot">
+<test id="s1-t1" name="Verify Login Returns 200" line="7">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>\nSending Request To ${GLOBAL_ENDPOINT_LOGIN}\n</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2024-06-24T13:51:35.973950" elapsed="0.001450"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2024-06-24T13:51:35.977476" level="INFO">&amp;{jsonBody} = { username=admin | password=masterPass }</msg>
+<var>&amp;{jsonBody}</var>
+<arg>username=admin</arg>
+<arg>password=masterPass</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2024-06-24T13:51:35.976791" elapsed="0.003677"/>
+</kw>
+<kw name="POST" owner="RequestsLibrary">
+<msg time="2024-06-24T13:51:35.989757" level="INFO">POST Request : url=http://127.0.0.1:5000/login 
+ path_url=/login 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '47', 'Content-Type': 'application/json'} 
+ body=b'{"username": "admin", "password": "masterPass"}' 
+ </msg>
+<msg time="2024-06-24T13:51:35.989757" level="INFO">POST Response : url=http://127.0.0.1:5000/login 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.0.3 Python/3.12.4', 'Date': 'Mon, 24 Jun 2024 11:51:35 GMT', 'Content-Type': 'application/json', 'Content-Length': '49', 'Connection': 'close'} 
+ body={"token":"asfd234fkaDkf2asdf2a889DFJSFlsDFWf21"}
+ 
+ </msg>
+<arg>url=${GLOBAL_ENDPOINT_LOGIN}</arg>
+<arg>json=${jsonBody}</arg>
+<arg>expected_status=200</arg>
+<doc>Sends a POST request.</doc>
+<status status="PASS" start="2024-06-24T13:51:35.980468" elapsed="0.009289"/>
+</kw>
+<status status="PASS" start="2024-06-24T13:51:35.972902" elapsed="0.017851"/>
+</test>
+<status status="PASS" start="2024-06-24T13:51:35.555405" elapsed="0.438343"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="Verify Login">Verify Login</stat>
+</suite>
+</statistics>
+<errors>
+<msg time="2024-06-24T13:51:35.588414" level="WARN">Imported resource file 'c:\Users\Bilgin\Projeler\udemy_api_tests\testdata\variables\json_schema_files.resource' is empty.</msg>
+</errors>
+</robot>
