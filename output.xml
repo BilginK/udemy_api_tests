@@ -1,289 +1,240 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.0.1 (Python 3.12.4 on win32)" generated="2024-06-25T14:45:18.796874" rpa="false" schemaversion="5">
-<suite id="s1" name="Login" source="c:\Users\Bilgin\Projeler\udemy_api_tests\tests\api\endpoints\login">
-<suite id="s1-s1" name="Verify Login" source="c:\Users\Bilgin\Projeler\udemy_api_tests\tests\api\endpoints\login\verify_login.robot">
-<test id="s1-s1-t1" name="Verify Login Returns 200" line="8">
-<kw name="Log To Console" owner="BuiltIn">
-<arg>\nSending Request To ${GLOBAL_ENDPOINT_LOGIN}\n</arg>
-<doc>Logs the given message to the console.</doc>
-<status status="PASS" start="2024-06-25T14:45:19.272029" elapsed="0.000000"/>
-</kw>
-<kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2024-06-25T14:45:19.272029" level="INFO">&amp;{jsonBody} = { username=admin | password=masterPass }</msg>
-<var>&amp;{jsonBody}</var>
-<arg>username=admin</arg>
-<arg>password=masterPass</arg>
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2024-06-25T14:45:19.272029" elapsed="0.000000"/>
-</kw>
-<kw name="POST" owner="RequestsLibrary">
-<msg time="2024-06-25T14:45:19.294393" level="INFO">POST Request : url=http://127.0.0.1:5000/login 
- path_url=/login 
- headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '47', 'Content-Type': 'application/json'} 
- body=b'{"username": "admin", "password": "masterPass"}' 
- </msg>
-<msg time="2024-06-25T14:45:19.294393" level="INFO">POST Response : url=http://127.0.0.1:5000/login 
- status=200, reason=OK 
- headers={'Server': 'Werkzeug/3.0.3 Python/3.12.4', 'Date': 'Tue, 25 Jun 2024 12:45:19 GMT', 'Content-Type': 'application/json', 'Content-Length': '49', 'Connection': 'close'} 
- body={"token":"asfd234fkaDkf2asdf2a889DFJSFlsDFWf21"}
- 
- </msg>
-<msg time="2024-06-25T14:45:19.294393" level="INFO">${response} = &lt;Response [200]&gt;</msg>
-<var>${response}</var>
-<arg>url=${GLOBAL_ENDPOINT_LOGIN}</arg>
-<arg>json=${jsonBody}</arg>
-<arg>expected_status=200</arg>
-<doc>Sends a POST request.</doc>
-<status status="PASS" start="2024-06-25T14:45:19.287579" elapsed="0.006814"/>
-</kw>
-<kw name="Validate Json Schema" owner="json_validate_schema">
-<arg>input_json=${response.json()}</arg>
-<arg>reference_schema_path=${GLOBAL_SCHEMA_PATH}</arg>
-<status status="PASS" start="2024-06-25T14:45:19.294393" elapsed="0.010950"/>
-</kw>
-<status status="PASS" start="2024-06-25T14:45:19.272029" elapsed="0.034312"/>
-</test>
-<status status="PASS" start="2024-06-25T14:45:18.824979" elapsed="0.482860"/>
-</suite>
-<suite id="s1-s2" name="Verify Login Wrong Auth" source="c:\Users\Bilgin\Projeler\udemy_api_tests\tests\api\endpoints\login\verify_login_wrong_auth.robot">
-<test id="s1-s2-t1" name="Verify Login With Wrong Password Returns 401" line="11">
+<robot generator="Robot 7.0.1 (Python 3.12.4 on win32)" generated="2024-06-25T15:09:56.021569" rpa="false" schemaversion="5">
+<suite id="s1" name="Verify Login Wrong Auth" source="c:\Users\Bilgin\Projeler\udemy_api_tests\tests\api\endpoints\login\verify_login_wrong_auth.robot">
+<test id="s1-t1" name="Verify Login With Wrong Password Returns 401" line="11">
 <kw name="Custom Test Template">
 <kw name="Log To Console" owner="BuiltIn">
 <arg>\nSending Request To ${GLOBAL_ENDPOINT_LOGIN}</arg>
 <doc>Logs the given message to the console.</doc>
-<status status="PASS" start="2024-06-25T14:45:19.327863" elapsed="0.000996"/>
+<status status="PASS" start="2024-06-25T15:09:56.502370" elapsed="0.001000"/>
 </kw>
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2024-06-25T14:45:19.329856" level="INFO">&amp;{jsonBody} = { username=admin | password=wrongPass }</msg>
+<msg time="2024-06-25T15:09:56.504876" level="INFO">&amp;{jsonBody} = { username=admin | password=wrongPass }</msg>
 <var>&amp;{jsonBody}</var>
 <arg>username=${username}</arg>
 <arg>password=${password}</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2024-06-25T14:45:19.328859" elapsed="0.001990"/>
+<status status="PASS" start="2024-06-25T15:09:56.503370" elapsed="0.003196"/>
 </kw>
 <kw name="POST" owner="RequestsLibrary">
-<msg time="2024-06-25T14:45:19.337416" level="INFO">POST Request : url=http://127.0.0.1:5000/login 
+<msg time="2024-06-25T15:09:56.519352" level="INFO">POST Request : url=http://127.0.0.1:5000/login 
  path_url=/login 
  headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '46', 'Content-Type': 'application/json'} 
  body=b'{"username": "admin", "password": "wrongPass"}' 
  </msg>
-<msg time="2024-06-25T14:45:19.338035" level="INFO">POST Response : url=http://127.0.0.1:5000/login 
+<msg time="2024-06-25T15:09:56.520349" level="INFO">POST Response : url=http://127.0.0.1:5000/login 
  status=401, reason=UNAUTHORIZED 
- headers={'Server': 'Werkzeug/3.0.3 Python/3.12.4', 'Date': 'Tue, 25 Jun 2024 12:45:19 GMT', 'Content-Type': 'application/json', 'Content-Length': '27', 'Connection': 'close'} 
+ headers={'Server': 'Werkzeug/3.0.3 Python/3.12.4', 'Date': 'Tue, 25 Jun 2024 13:09:56 GMT', 'Content-Type': 'application/json', 'Content-Length': '27', 'Connection': 'close'} 
  body={"ERROR":"NOT AUTHORIZED"}
  
  </msg>
-<msg time="2024-06-25T14:45:19.338035" level="INFO">${response} = &lt;Response [401]&gt;</msg>
+<msg time="2024-06-25T15:09:56.520349" level="INFO">${response} = &lt;Response [401]&gt;</msg>
 <var>${response}</var>
 <arg>${GLOBAL_ENDPOINT_LOGIN}</arg>
 <arg>json=${jsonBody}</arg>
 <arg>expected_status=401</arg>
 <doc>Sends a POST request.</doc>
-<status status="PASS" start="2024-06-25T14:45:19.330849" elapsed="0.008194"/>
+<status status="PASS" start="2024-06-25T15:09:56.507563" elapsed="0.013797"/>
 </kw>
-<kw name="Validate Schema" owner="validation">
+<kw name="Validate Schema" owner="validations">
 <kw name="Log To Console" owner="BuiltIn">
 <arg>Validating the JSON Schema!</arg>
 <doc>Logs the given message to the console.</doc>
-<status status="PASS" start="2024-06-25T14:45:19.342575" elapsed="0.000000"/>
+<status status="PASS" start="2024-06-25T15:09:56.523341" elapsed="0.000000"/>
 </kw>
 <kw name="Validate Json Schema" owner="json_validate_schema">
 <arg>input_json=${input_json}</arg>
 <arg>reference_schema_path=${referenceSchemaPath}</arg>
-<status status="PASS" start="2024-06-25T14:45:19.342575" elapsed="0.000000"/>
+<status status="PASS" start="2024-06-25T15:09:56.523341" elapsed="0.004058"/>
 </kw>
 <arg>input_json=${response.json()}</arg>
 <arg>referenceSchemaPath=${GLOBAL_SCHEMA_ERROR}</arg>
-<status status="PASS" start="2024-06-25T14:45:19.340895" elapsed="0.001680"/>
+<status status="PASS" start="2024-06-25T15:09:56.522344" elapsed="0.006061"/>
 </kw>
 <arg>admin</arg>
 <arg>wrongPass</arg>
-<status status="PASS" start="2024-06-25T14:45:19.327863" elapsed="0.014712"/>
+<status status="PASS" start="2024-06-25T15:09:56.501867" elapsed="0.026538"/>
 </kw>
-<status status="PASS" start="2024-06-25T14:45:19.326865" elapsed="0.015710"/>
+<status status="PASS" start="2024-06-25T15:09:56.500871" elapsed="0.028541"/>
 </test>
-<test id="s1-s2-t2" name="Verify Login With Wrong User Returns 401" line="13">
+<test id="s1-t2" name="Verify Login With Wrong User Returns 401" line="13">
 <kw name="Custom Test Template">
 <kw name="Log To Console" owner="BuiltIn">
 <arg>\nSending Request To ${GLOBAL_ENDPOINT_LOGIN}</arg>
 <doc>Logs the given message to the console.</doc>
-<status status="PASS" start="2024-06-25T14:45:19.356602" elapsed="0.002517"/>
+<status status="PASS" start="2024-06-25T15:09:56.533399" elapsed="0.000000"/>
 </kw>
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2024-06-25T14:45:19.359119" level="INFO">&amp;{jsonBody} = { username=guest | password=masterPass }</msg>
+<msg time="2024-06-25T15:09:56.534939" level="INFO">&amp;{jsonBody} = { username=guest | password=masterPass }</msg>
 <var>&amp;{jsonBody}</var>
 <arg>username=${username}</arg>
 <arg>password=${password}</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2024-06-25T14:45:19.359119" elapsed="0.000000"/>
+<status status="PASS" start="2024-06-25T15:09:56.533399" elapsed="0.001540"/>
 </kw>
 <kw name="POST" owner="RequestsLibrary">
-<msg time="2024-06-25T14:45:19.393170" level="INFO">POST Request : url=http://127.0.0.1:5000/login 
+<msg time="2024-06-25T15:09:56.542163" level="INFO">POST Request : url=http://127.0.0.1:5000/login 
  path_url=/login 
  headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '47', 'Content-Type': 'application/json'} 
  body=b'{"username": "guest", "password": "masterPass"}' 
  </msg>
-<msg time="2024-06-25T14:45:19.393170" level="INFO">POST Response : url=http://127.0.0.1:5000/login 
+<msg time="2024-06-25T15:09:56.542163" level="INFO">POST Response : url=http://127.0.0.1:5000/login 
  status=401, reason=UNAUTHORIZED 
- headers={'Server': 'Werkzeug/3.0.3 Python/3.12.4', 'Date': 'Tue, 25 Jun 2024 12:45:19 GMT', 'Content-Type': 'application/json', 'Content-Length': '27', 'Connection': 'close'} 
+ headers={'Server': 'Werkzeug/3.0.3 Python/3.12.4', 'Date': 'Tue, 25 Jun 2024 13:09:56 GMT', 'Content-Type': 'application/json', 'Content-Length': '27', 'Connection': 'close'} 
  body={"ERROR":"NOT AUTHORIZED"}
  
  </msg>
-<msg time="2024-06-25T14:45:19.393170" level="INFO">${response} = &lt;Response [401]&gt;</msg>
+<msg time="2024-06-25T15:09:56.543166" level="INFO">${response} = &lt;Response [401]&gt;</msg>
 <var>${response}</var>
 <arg>${GLOBAL_ENDPOINT_LOGIN}</arg>
 <arg>json=${jsonBody}</arg>
 <arg>expected_status=401</arg>
 <doc>Sends a POST request.</doc>
-<status status="PASS" start="2024-06-25T14:45:19.359119" elapsed="0.034051"/>
+<status status="PASS" start="2024-06-25T15:09:56.534939" elapsed="0.008227"/>
 </kw>
-<kw name="Validate Schema" owner="validation">
+<kw name="Validate Schema" owner="validations">
 <kw name="Log To Console" owner="BuiltIn">
 <arg>Validating the JSON Schema!</arg>
 <doc>Logs the given message to the console.</doc>
-<status status="PASS" start="2024-06-25T14:45:19.393170" elapsed="0.000000"/>
+<status status="PASS" start="2024-06-25T15:09:56.547211" elapsed="0.000992"/>
 </kw>
 <kw name="Validate Json Schema" owner="json_validate_schema">
 <arg>input_json=${input_json}</arg>
 <arg>reference_schema_path=${referenceSchemaPath}</arg>
-<status status="PASS" start="2024-06-25T14:45:19.393170" elapsed="0.000000"/>
+<status status="PASS" start="2024-06-25T15:09:56.548203" elapsed="0.003986"/>
 </kw>
 <arg>input_json=${response.json()}</arg>
 <arg>referenceSchemaPath=${GLOBAL_SCHEMA_ERROR}</arg>
-<status status="PASS" start="2024-06-25T14:45:19.393170" elapsed="0.011078"/>
+<status status="PASS" start="2024-06-25T15:09:56.544676" elapsed="0.007513"/>
 </kw>
 <arg>guest</arg>
 <arg>masterPass</arg>
-<status status="PASS" start="2024-06-25T14:45:19.355272" elapsed="0.049992"/>
+<status status="PASS" start="2024-06-25T15:09:56.532401" elapsed="0.019788"/>
 </kw>
-<status status="PASS" start="2024-06-25T14:45:19.342575" elapsed="0.063685"/>
+<status status="PASS" start="2024-06-25T15:09:56.531414" elapsed="0.021772"/>
 </test>
-<test id="s1-s2-t3" name="Verify Login With Empty Data Returns 401" line="15">
+<test id="s1-t3" name="Verify Login With Empty Data Returns 401" line="15">
 <kw name="Custom Test Template">
 <kw name="Log To Console" owner="BuiltIn">
 <arg>\nSending Request To ${GLOBAL_ENDPOINT_LOGIN}</arg>
 <doc>Logs the given message to the console.</doc>
-<status status="PASS" start="2024-06-25T14:45:19.411234" elapsed="0.000996"/>
+<status status="PASS" start="2024-06-25T15:09:56.556200" elapsed="0.000999"/>
 </kw>
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2024-06-25T14:45:19.413227" level="INFO">&amp;{jsonBody} = { username= | password= }</msg>
+<msg time="2024-06-25T15:09:56.558197" level="INFO">&amp;{jsonBody} = { username= | password= }</msg>
 <var>&amp;{jsonBody}</var>
 <arg>username=${username}</arg>
 <arg>password=${password}</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2024-06-25T14:45:19.413227" elapsed="0.000997"/>
+<status status="PASS" start="2024-06-25T15:09:56.557199" elapsed="0.000998"/>
 </kw>
 <kw name="POST" owner="RequestsLibrary">
-<msg time="2024-06-25T14:45:19.430980" level="INFO">POST Request : url=http://127.0.0.1:5000/login 
+<msg time="2024-06-25T15:09:56.567202" level="INFO">POST Request : url=http://127.0.0.1:5000/login 
  path_url=/login 
  headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '32', 'Content-Type': 'application/json'} 
  body=b'{"username": "", "password": ""}' 
  </msg>
-<msg time="2024-06-25T14:45:19.430980" level="INFO">POST Response : url=http://127.0.0.1:5000/login 
+<msg time="2024-06-25T15:09:56.567202" level="INFO">POST Response : url=http://127.0.0.1:5000/login 
  status=401, reason=UNAUTHORIZED 
- headers={'Server': 'Werkzeug/3.0.3 Python/3.12.4', 'Date': 'Tue, 25 Jun 2024 12:45:19 GMT', 'Content-Type': 'application/json', 'Content-Length': '27', 'Connection': 'close'} 
+ headers={'Server': 'Werkzeug/3.0.3 Python/3.12.4', 'Date': 'Tue, 25 Jun 2024 13:09:56 GMT', 'Content-Type': 'application/json', 'Content-Length': '27', 'Connection': 'close'} 
  body={"ERROR":"NOT AUTHORIZED"}
  
  </msg>
-<msg time="2024-06-25T14:45:19.431950" level="INFO">${response} = &lt;Response [401]&gt;</msg>
+<msg time="2024-06-25T15:09:56.567202" level="INFO">${response} = &lt;Response [401]&gt;</msg>
 <var>${response}</var>
 <arg>${GLOBAL_ENDPOINT_LOGIN}</arg>
 <arg>json=${jsonBody}</arg>
 <arg>expected_status=401</arg>
 <doc>Sends a POST request.</doc>
-<status status="PASS" start="2024-06-25T14:45:19.414224" elapsed="0.017726"/>
+<status status="PASS" start="2024-06-25T15:09:56.559194" elapsed="0.009005"/>
 </kw>
-<kw name="Validate Schema" owner="validation">
+<kw name="Validate Schema" owner="validations">
 <kw name="Log To Console" owner="BuiltIn">
 <arg>Validating the JSON Schema!</arg>
 <doc>Logs the given message to the console.</doc>
-<status status="PASS" start="2024-06-25T14:45:19.432950" elapsed="0.001000"/>
+<status status="PASS" start="2024-06-25T15:09:56.570196" elapsed="0.000000"/>
 </kw>
 <kw name="Validate Json Schema" owner="json_validate_schema">
 <arg>input_json=${input_json}</arg>
 <arg>reference_schema_path=${referenceSchemaPath}</arg>
-<status status="PASS" start="2024-06-25T14:45:19.433950" elapsed="0.003524"/>
+<status status="PASS" start="2024-06-25T15:09:56.571189" elapsed="0.001001"/>
 </kw>
 <arg>input_json=${response.json()}</arg>
 <arg>referenceSchemaPath=${GLOBAL_SCHEMA_ERROR}</arg>
-<status status="PASS" start="2024-06-25T14:45:19.431950" elapsed="0.006530"/>
+<status status="PASS" start="2024-06-25T15:09:56.568199" elapsed="0.004987"/>
 </kw>
 <arg>${EMPTY}</arg>
 <arg>${EMPTY}</arg>
-<status status="PASS" start="2024-06-25T14:45:19.409238" elapsed="0.029242"/>
+<status status="PASS" start="2024-06-25T15:09:56.554692" elapsed="0.018494"/>
 </kw>
-<status status="PASS" start="2024-06-25T14:45:19.408242" elapsed="0.030238"/>
+<status status="PASS" start="2024-06-25T15:09:56.553186" elapsed="0.020000"/>
 </test>
-<test id="s1-s2-t4" name="Verify Login With Wrong User And Password Returns 401" line="17">
+<test id="s1-t4" name="Verify Login With Wrong User And Password Returns 401" line="17">
 <kw name="Custom Test Template">
 <kw name="Log To Console" owner="BuiltIn">
 <arg>\nSending Request To ${GLOBAL_ENDPOINT_LOGIN}</arg>
 <doc>Logs the given message to the console.</doc>
-<status status="PASS" start="2024-06-25T14:45:19.442466" elapsed="0.001002"/>
+<status status="PASS" start="2024-06-25T15:09:56.576204" elapsed="0.002024"/>
 </kw>
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2024-06-25T14:45:19.444457" level="INFO">&amp;{jsonBody} = { username=guest | password=wrongPass }</msg>
+<msg time="2024-06-25T15:09:56.580229" level="INFO">&amp;{jsonBody} = { username=guest | password=wrongPass }</msg>
 <var>&amp;{jsonBody}</var>
 <arg>username=${username}</arg>
 <arg>password=${password}</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2024-06-25T14:45:19.443468" elapsed="0.000989"/>
+<status status="PASS" start="2024-06-25T15:09:56.579241" elapsed="0.000988"/>
 </kw>
 <kw name="POST" owner="RequestsLibrary">
-<msg time="2024-06-25T14:45:19.449440" level="INFO">POST Request : url=http://127.0.0.1:5000/login 
+<msg time="2024-06-25T15:09:56.587229" level="INFO">POST Request : url=http://127.0.0.1:5000/login 
  path_url=/login 
  headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '46', 'Content-Type': 'application/json'} 
  body=b'{"username": "guest", "password": "wrongPass"}' 
  </msg>
-<msg time="2024-06-25T14:45:19.450437" level="INFO">POST Response : url=http://127.0.0.1:5000/login 
+<msg time="2024-06-25T15:09:56.587229" level="INFO">POST Response : url=http://127.0.0.1:5000/login 
  status=401, reason=UNAUTHORIZED 
- headers={'Server': 'Werkzeug/3.0.3 Python/3.12.4', 'Date': 'Tue, 25 Jun 2024 12:45:19 GMT', 'Content-Type': 'application/json', 'Content-Length': '27', 'Connection': 'close'} 
+ headers={'Server': 'Werkzeug/3.0.3 Python/3.12.4', 'Date': 'Tue, 25 Jun 2024 13:09:56 GMT', 'Content-Type': 'application/json', 'Content-Length': '27', 'Connection': 'close'} 
  body={"ERROR":"NOT AUTHORIZED"}
  
  </msg>
-<msg time="2024-06-25T14:45:19.450437" level="INFO">${response} = &lt;Response [401]&gt;</msg>
+<msg time="2024-06-25T15:09:56.587229" level="INFO">${response} = &lt;Response [401]&gt;</msg>
 <var>${response}</var>
 <arg>${GLOBAL_ENDPOINT_LOGIN}</arg>
 <arg>json=${jsonBody}</arg>
 <arg>expected_status=401</arg>
 <doc>Sends a POST request.</doc>
-<status status="PASS" start="2024-06-25T14:45:19.444457" elapsed="0.005980"/>
+<status status="PASS" start="2024-06-25T15:09:56.580229" elapsed="0.007000"/>
 </kw>
-<kw name="Validate Schema" owner="validation">
+<kw name="Validate Schema" owner="validations">
 <kw name="Log To Console" owner="BuiltIn">
 <arg>Validating the JSON Schema!</arg>
 <doc>Logs the given message to the console.</doc>
-<status status="PASS" start="2024-06-25T14:45:19.452431" elapsed="0.000566"/>
+<status status="PASS" start="2024-06-25T15:09:56.589222" elapsed="0.001023"/>
 </kw>
 <kw name="Validate Json Schema" owner="json_validate_schema">
 <arg>input_json=${input_json}</arg>
 <arg>reference_schema_path=${referenceSchemaPath}</arg>
-<status status="PASS" start="2024-06-25T14:45:19.454248" elapsed="0.002422"/>
+<status status="PASS" start="2024-06-25T15:09:56.590245" elapsed="0.002963"/>
 </kw>
 <arg>input_json=${response.json()}</arg>
 <arg>referenceSchemaPath=${GLOBAL_SCHEMA_ERROR}</arg>
-<status status="PASS" start="2024-06-25T14:45:19.450437" elapsed="0.006233"/>
+<status status="PASS" start="2024-06-25T15:09:56.588228" elapsed="0.006521"/>
 </kw>
 <arg>guest</arg>
 <arg>wrongPass</arg>
-<status status="PASS" start="2024-06-25T14:45:19.441475" elapsed="0.015195"/>
+<status status="PASS" start="2024-06-25T15:09:56.575697" elapsed="0.019436"/>
 </kw>
-<status status="PASS" start="2024-06-25T14:45:19.440470" elapsed="0.016200"/>
+<status status="PASS" start="2024-06-25T15:09:56.574692" elapsed="0.020948"/>
 </test>
-<status status="PASS" start="2024-06-25T14:45:19.310834" elapsed="0.145836"/>
-</suite>
-<status status="PASS" start="2024-06-25T14:45:18.801828" elapsed="0.654842"/>
+<status status="PASS" start="2024-06-25T15:09:56.026985" elapsed="0.570848"/>
 </suite>
 <statistics>
 <total>
-<stat pass="5" fail="0" skip="0">All Tests</stat>
+<stat pass="4" fail="0" skip="0">All Tests</stat>
 </total>
 <tag>
 </tag>
 <suite>
-<stat pass="5" fail="0" skip="0" id="s1" name="Login">Login</stat>
-<stat pass="1" fail="0" skip="0" id="s1-s1" name="Verify Login">Login.Verify Login</stat>
-<stat pass="4" fail="0" skip="0" id="s1-s2" name="Verify Login Wrong Auth">Login.Verify Login Wrong Auth</stat>
+<stat pass="4" fail="0" skip="0" id="s1" name="Verify Login Wrong Auth">Verify Login Wrong Auth</stat>
 </suite>
 </statistics>
 <errors>

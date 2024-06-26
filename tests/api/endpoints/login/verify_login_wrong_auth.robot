@@ -1,6 +1,6 @@
 *** Settings ***
 Resource    ../../../../testdata/variables/import.resource
-Resource    ../../../../keywords/validation.robot
+Resource    ../../../../keywords/validations.robot
 
 Library    RequestsLibrary
 Library    ../../../../lib/json_validate_schema.py
