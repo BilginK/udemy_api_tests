@@ -1,26 +1,25 @@
 *** Settings ***
-Resource    ../../../../testdata/variables/import.resource
-Resource    ../../../../keywords/validations.robot
+Resource    ../../../../testdata/variables/imports.resource
+Resource    ../../../../keywords/imports.resource
 
 Library    RequestsLibrary
-Library    ../../../../lib/json_validate_schema.py
 
 Test Template    Custom Test Template
 
-*** Test Cases ***                                    USERNAME            PASSWORD
-Verify Login With Wrong Password Returns 401           admin               wrongPass
-
-Verify Login With Wrong User Returns 401               guest                masterPass
-
-Verify Login With Empty Data Returns 401               ${EMPTY}            ${EMPTY}
+*** Test Cases ***                                       USERNAME        PASSWORD
+Verify Login With Wrong Password Returns 401             admin           wrongPass
+    
+Verify Login With Wrong User Returns 401                 guest           masterPass
+    
+Verify Login With Empty Data Returns 401                 ${Empty}        ${Empty}
 
 Verify Login With Wrong User And Password Returns 401    guest        wrongPass
 
 
 *** Keywords ***
 Custom Test Template
-    [Arguments]    ${username}        ${password}
-    Log To Console    \nSending Request To ${GLOBAL_ENDPOINT_LOGIN}
-    &{jsonBody}    Create Dictionary    username=${username}    password=${password}
-    ${response}    POST    ${GLOBAL_ENDPOINT_LOGIN}    json=${jsonBody}    expected_status=401
-    Validate Schema    input_json=${response.json()}   referenceSchemaPath=${GLOBAL_SCHEMA_ERROR}
+    [Arguments]  ${username}  ${password}
+    Log To Console    \nSending Request To ${GLOBAL_ENDPOINT_LOGIN}\n
+    &{jsonBody}  Create Dictionary  username=${username}  password=${password}
+    ${response}  POST  url=${GLOBAL_ENDPOINT_LOGIN}  json=${jsonBody}  expected_status=401
+    Validate Schema   inputJson=${response.json()}    referenceSchemaPath=${GLOBAL_SCHEMA_ERROR}

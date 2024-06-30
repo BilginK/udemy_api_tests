@@ -1,242 +1,212 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.0.1 (Python 3.12.4 on win32)" generated="2024-06-25T15:09:56.021569" rpa="false" schemaversion="5">
-<suite id="s1" name="Verify Login Wrong Auth" source="c:\Users\Bilgin\Projeler\udemy_api_tests\tests\api\endpoints\login\verify_login_wrong_auth.robot">
-<test id="s1-t1" name="Verify Login With Wrong Password Returns 401" line="11">
-<kw name="Custom Test Template">
-<kw name="Log To Console" owner="BuiltIn">
-<arg>\nSending Request To ${GLOBAL_ENDPOINT_LOGIN}</arg>
-<doc>Logs the given message to the console.</doc>
-<status status="PASS" start="2024-06-25T15:09:56.502370" elapsed="0.001000"/>
-</kw>
+<robot generator="Robot 7.0.1 (Python 3.12.4 on win32)" generated="2024-06-29T18:44:41.187148" rpa="false" schemaversion="5">
+<suite id="s1" name="Verify Get Users" source="c:\Users\Bilgin\Projeler\udemy_api_tests\tests\api\endpoints\users\verify_get_users.robot">
+<kw name="Authorize" owner="setupTeardowns" type="SETUP">
+<if>
+<branch type="IF" condition="not ${GLOBAL_AUTH_SET}">
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2024-06-25T15:09:56.504876" level="INFO">&amp;{jsonBody} = { username=admin | password=wrongPass }</msg>
+<msg time="2024-06-29T18:44:41.737085" level="INFO">&amp;{jsonBody} = { username=admin | password=masterPass }</msg>
 <var>&amp;{jsonBody}</var>
-<arg>username=${username}</arg>
-<arg>password=${password}</arg>
+<arg>username=admin</arg>
+<arg>password=masterPass</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2024-06-25T15:09:56.503370" elapsed="0.003196"/>
+<status status="PASS" start="2024-06-29T18:44:41.737085" elapsed="0.002479"/>
 </kw>
 <kw name="POST" owner="RequestsLibrary">
-<msg time="2024-06-25T15:09:56.519352" level="INFO">POST Request : url=http://127.0.0.1:5000/login 
- path_url=/login 
- headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '46', 'Content-Type': 'application/json'} 
- body=b'{"username": "admin", "password": "wrongPass"}' 
- </msg>
-<msg time="2024-06-25T15:09:56.520349" level="INFO">POST Response : url=http://127.0.0.1:5000/login 
- status=401, reason=UNAUTHORIZED 
- headers={'Server': 'Werkzeug/3.0.3 Python/3.12.4', 'Date': 'Tue, 25 Jun 2024 13:09:56 GMT', 'Content-Type': 'application/json', 'Content-Length': '27', 'Connection': 'close'} 
- body={"ERROR":"NOT AUTHORIZED"}
- 
- </msg>
-<msg time="2024-06-25T15:09:56.520349" level="INFO">${response} = &lt;Response [401]&gt;</msg>
-<var>${response}</var>
-<arg>${GLOBAL_ENDPOINT_LOGIN}</arg>
-<arg>json=${jsonBody}</arg>
-<arg>expected_status=401</arg>
-<doc>Sends a POST request.</doc>
-<status status="PASS" start="2024-06-25T15:09:56.507563" elapsed="0.013797"/>
-</kw>
-<kw name="Validate Schema" owner="validations">
-<kw name="Log To Console" owner="BuiltIn">
-<arg>Validating the JSON Schema!</arg>
-<doc>Logs the given message to the console.</doc>
-<status status="PASS" start="2024-06-25T15:09:56.523341" elapsed="0.000000"/>
-</kw>
-<kw name="Validate Json Schema" owner="json_validate_schema">
-<arg>input_json=${input_json}</arg>
-<arg>reference_schema_path=${referenceSchemaPath}</arg>
-<status status="PASS" start="2024-06-25T15:09:56.523341" elapsed="0.004058"/>
-</kw>
-<arg>input_json=${response.json()}</arg>
-<arg>referenceSchemaPath=${GLOBAL_SCHEMA_ERROR}</arg>
-<status status="PASS" start="2024-06-25T15:09:56.522344" elapsed="0.006061"/>
-</kw>
-<arg>admin</arg>
-<arg>wrongPass</arg>
-<status status="PASS" start="2024-06-25T15:09:56.501867" elapsed="0.026538"/>
-</kw>
-<status status="PASS" start="2024-06-25T15:09:56.500871" elapsed="0.028541"/>
-</test>
-<test id="s1-t2" name="Verify Login With Wrong User Returns 401" line="13">
-<kw name="Custom Test Template">
-<kw name="Log To Console" owner="BuiltIn">
-<arg>\nSending Request To ${GLOBAL_ENDPOINT_LOGIN}</arg>
-<doc>Logs the given message to the console.</doc>
-<status status="PASS" start="2024-06-25T15:09:56.533399" elapsed="0.000000"/>
-</kw>
-<kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2024-06-25T15:09:56.534939" level="INFO">&amp;{jsonBody} = { username=guest | password=masterPass }</msg>
-<var>&amp;{jsonBody}</var>
-<arg>username=${username}</arg>
-<arg>password=${password}</arg>
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2024-06-25T15:09:56.533399" elapsed="0.001540"/>
-</kw>
-<kw name="POST" owner="RequestsLibrary">
-<msg time="2024-06-25T15:09:56.542163" level="INFO">POST Request : url=http://127.0.0.1:5000/login 
+<msg time="2024-06-29T18:44:41.752425" level="INFO">POST Request : url=http://127.0.0.1:5000/login 
  path_url=/login 
  headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '47', 'Content-Type': 'application/json'} 
- body=b'{"username": "guest", "password": "masterPass"}' 
+ body=b'{"username": "admin", "password": "masterPass"}' 
  </msg>
-<msg time="2024-06-25T15:09:56.542163" level="INFO">POST Response : url=http://127.0.0.1:5000/login 
- status=401, reason=UNAUTHORIZED 
- headers={'Server': 'Werkzeug/3.0.3 Python/3.12.4', 'Date': 'Tue, 25 Jun 2024 13:09:56 GMT', 'Content-Type': 'application/json', 'Content-Length': '27', 'Connection': 'close'} 
- body={"ERROR":"NOT AUTHORIZED"}
+<msg time="2024-06-29T18:44:41.754419" level="INFO">POST Response : url=http://127.0.0.1:5000/login 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.0.3 Python/3.12.4', 'Date': 'Sat, 29 Jun 2024 16:44:41 GMT', 'Content-Type': 'application/json', 'Content-Length': '49', 'Connection': 'close'} 
+ body={"token":"asfd234fkaDkf2asdf2a889DFJSFlsDFWf21"}
  
  </msg>
-<msg time="2024-06-25T15:09:56.543166" level="INFO">${response} = &lt;Response [401]&gt;</msg>
+<msg time="2024-06-29T18:44:41.755420" level="INFO">${response} = &lt;Response [200]&gt;</msg>
 <var>${response}</var>
-<arg>${GLOBAL_ENDPOINT_LOGIN}</arg>
+<arg>url=${GLOBAL_ENDPOINT_LOGIN}</arg>
 <arg>json=${jsonBody}</arg>
-<arg>expected_status=401</arg>
+<arg>expected_status=200</arg>
 <doc>Sends a POST request.</doc>
-<status status="PASS" start="2024-06-25T15:09:56.534939" elapsed="0.008227"/>
+<status status="PASS" start="2024-06-29T18:44:41.740557" elapsed="0.014863"/>
 </kw>
-<kw name="Validate Schema" owner="validations">
-<kw name="Log To Console" owner="BuiltIn">
-<arg>Validating the JSON Schema!</arg>
-<doc>Logs the given message to the console.</doc>
-<status status="PASS" start="2024-06-25T15:09:56.547211" elapsed="0.000992"/>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2024-06-29T18:44:41.756925" level="INFO">${responseJson} = {'token': 'asfd234fkaDkf2asdf2a889DFJSFlsDFWf21'}</msg>
+<var>${responseJson}</var>
+<arg>${response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2024-06-29T18:44:41.755420" elapsed="0.001505"/>
 </kw>
-<kw name="Validate Json Schema" owner="json_validate_schema">
-<arg>input_json=${input_json}</arg>
-<arg>reference_schema_path=${referenceSchemaPath}</arg>
-<status status="PASS" start="2024-06-25T15:09:56.548203" elapsed="0.003986"/>
-</kw>
-<arg>input_json=${response.json()}</arg>
-<arg>referenceSchemaPath=${GLOBAL_SCHEMA_ERROR}</arg>
-<status status="PASS" start="2024-06-25T15:09:56.544676" elapsed="0.007513"/>
-</kw>
-<arg>guest</arg>
-<arg>masterPass</arg>
-<status status="PASS" start="2024-06-25T15:09:56.532401" elapsed="0.019788"/>
-</kw>
-<status status="PASS" start="2024-06-25T15:09:56.531414" elapsed="0.021772"/>
-</test>
-<test id="s1-t3" name="Verify Login With Empty Data Returns 401" line="15">
-<kw name="Custom Test Template">
-<kw name="Log To Console" owner="BuiltIn">
-<arg>\nSending Request To ${GLOBAL_ENDPOINT_LOGIN}</arg>
-<doc>Logs the given message to the console.</doc>
-<status status="PASS" start="2024-06-25T15:09:56.556200" elapsed="0.000999"/>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2024-06-29T18:44:41.758446" level="INFO">${token} = asfd234fkaDkf2asdf2a889DFJSFlsDFWf21</msg>
+<var>${token}</var>
+<arg>${responseJson}</arg>
+<arg>token</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2024-06-29T18:44:41.757926" elapsed="0.000520"/>
 </kw>
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2024-06-25T15:09:56.558197" level="INFO">&amp;{jsonBody} = { username= | password= }</msg>
-<var>&amp;{jsonBody}</var>
-<arg>username=${username}</arg>
-<arg>password=${password}</arg>
+<msg time="2024-06-29T18:44:41.759449" level="INFO">${headers} = {'Authorization': 'Bearer asfd234fkaDkf2asdf2a889DFJSFlsDFWf21'}</msg>
+<var>${headers}</var>
+<arg>Authorization=Bearer ${token}</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2024-06-25T15:09:56.557199" elapsed="0.000998"/>
+<status status="PASS" start="2024-06-29T18:44:41.758446" elapsed="0.001003"/>
 </kw>
-<kw name="POST" owner="RequestsLibrary">
-<msg time="2024-06-25T15:09:56.567202" level="INFO">POST Request : url=http://127.0.0.1:5000/login 
- path_url=/login 
- headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '32', 'Content-Type': 'application/json'} 
- body=b'{"username": "", "password": ""}' 
- </msg>
-<msg time="2024-06-25T15:09:56.567202" level="INFO">POST Response : url=http://127.0.0.1:5000/login 
- status=401, reason=UNAUTHORIZED 
- headers={'Server': 'Werkzeug/3.0.3 Python/3.12.4', 'Date': 'Tue, 25 Jun 2024 13:09:56 GMT', 'Content-Type': 'application/json', 'Content-Length': '27', 'Connection': 'close'} 
- body={"ERROR":"NOT AUTHORIZED"}
- 
- </msg>
-<msg time="2024-06-25T15:09:56.567202" level="INFO">${response} = &lt;Response [401]&gt;</msg>
-<var>${response}</var>
-<arg>${GLOBAL_ENDPOINT_LOGIN}</arg>
-<arg>json=${jsonBody}</arg>
-<arg>expected_status=401</arg>
-<doc>Sends a POST request.</doc>
-<status status="PASS" start="2024-06-25T15:09:56.559194" elapsed="0.009005"/>
+<kw name="Set Global Variable" owner="BuiltIn">
+<msg time="2024-06-29T18:44:41.759449" level="INFO">${GLOBAL_AUTH_HEADER} = {'Authorization': 'Bearer asfd234fkaDkf2asdf2a889DFJSFlsDFWf21'}</msg>
+<arg>${GLOBAL_AUTH_HEADER}</arg>
+<arg>${headers}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<status status="PASS" start="2024-06-29T18:44:41.759449" elapsed="0.000000"/>
 </kw>
-<kw name="Validate Schema" owner="validations">
+<kw name="Set Global Variable" owner="BuiltIn">
+<msg time="2024-06-29T18:44:41.761450" level="INFO">${GLOBAL_AUTH_SET} = True</msg>
+<arg>${GLOBAL_AUTH_SET}</arg>
+<arg>${True}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<status status="PASS" start="2024-06-29T18:44:41.760495" elapsed="0.000955"/>
+</kw>
+<status status="PASS" start="2024-06-29T18:44:41.735541" elapsed="0.025909"/>
+</branch>
+<status status="PASS" start="2024-06-29T18:44:41.735541" elapsed="0.025909"/>
+</if>
+<status status="PASS" start="2024-06-29T18:44:41.735541" elapsed="0.026897"/>
+</kw>
+<test id="s1-t1" name="Verify All Users" line="9">
 <kw name="Log To Console" owner="BuiltIn">
-<arg>Validating the JSON Schema!</arg>
+<arg>\nSending Request To ${GLOBAL_ENDPOINT_USERS}\n</arg>
 <doc>Logs the given message to the console.</doc>
-<status status="PASS" start="2024-06-25T15:09:56.570196" elapsed="0.000000"/>
-</kw>
-<kw name="Validate Json Schema" owner="json_validate_schema">
-<arg>input_json=${input_json}</arg>
-<arg>reference_schema_path=${referenceSchemaPath}</arg>
-<status status="PASS" start="2024-06-25T15:09:56.571189" elapsed="0.001001"/>
-</kw>
-<arg>input_json=${response.json()}</arg>
-<arg>referenceSchemaPath=${GLOBAL_SCHEMA_ERROR}</arg>
-<status status="PASS" start="2024-06-25T15:09:56.568199" elapsed="0.004987"/>
-</kw>
-<arg>${EMPTY}</arg>
-<arg>${EMPTY}</arg>
-<status status="PASS" start="2024-06-25T15:09:56.554692" elapsed="0.018494"/>
-</kw>
-<status status="PASS" start="2024-06-25T15:09:56.553186" elapsed="0.020000"/>
-</test>
-<test id="s1-t4" name="Verify Login With Wrong User And Password Returns 401" line="17">
-<kw name="Custom Test Template">
-<kw name="Log To Console" owner="BuiltIn">
-<arg>\nSending Request To ${GLOBAL_ENDPOINT_LOGIN}</arg>
-<doc>Logs the given message to the console.</doc>
-<status status="PASS" start="2024-06-25T15:09:56.576204" elapsed="0.002024"/>
+<status status="PASS" start="2024-06-29T18:44:41.762787" elapsed="0.001041"/>
 </kw>
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2024-06-25T15:09:56.580229" level="INFO">&amp;{jsonBody} = { username=guest | password=wrongPass }</msg>
-<var>&amp;{jsonBody}</var>
-<arg>username=${username}</arg>
-<arg>password=${password}</arg>
+<msg time="2024-06-29T18:44:41.764825" level="INFO">${params} = {'filter': 'all'}</msg>
+<var>${params}</var>
+<arg>filter=all</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2024-06-25T15:09:56.579241" elapsed="0.000988"/>
+<status status="PASS" start="2024-06-29T18:44:41.763828" elapsed="0.001991"/>
 </kw>
-<kw name="POST" owner="RequestsLibrary">
-<msg time="2024-06-25T15:09:56.587229" level="INFO">POST Request : url=http://127.0.0.1:5000/login 
- path_url=/login 
- headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '46', 'Content-Type': 'application/json'} 
- body=b'{"username": "guest", "password": "wrongPass"}' 
+<kw name="GET" owner="RequestsLibrary">
+<msg time="2024-06-29T18:44:41.787870" level="INFO">GET Request : url=http://127.0.0.1:5000/users?filter=all 
+ path_url=/users?filter=all 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer asfd234fkaDkf2asdf2a889DFJSFlsDFWf21'} 
+ body=None 
  </msg>
-<msg time="2024-06-25T15:09:56.587229" level="INFO">POST Response : url=http://127.0.0.1:5000/login 
- status=401, reason=UNAUTHORIZED 
- headers={'Server': 'Werkzeug/3.0.3 Python/3.12.4', 'Date': 'Tue, 25 Jun 2024 13:09:56 GMT', 'Content-Type': 'application/json', 'Content-Length': '27', 'Connection': 'close'} 
- body={"ERROR":"NOT AUTHORIZED"}
+<msg time="2024-06-29T18:44:41.787870" level="INFO">GET Response : url=http://127.0.0.1:5000/users?filter=all 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.0.3 Python/3.12.4', 'Date': 'Sat, 29 Jun 2024 16:44:41 GMT', 'Content-Type': 'application/json', 'Content-Length': '1768', 'Connection': 'close'} 
+ body={"users":[{"active":true,"city":"Testcity","contracts":[{"currency":"USD","id":33,"price":9.99,"type":"basic"},{"currency":"USD","id":106,"price":39.99,"type":"premium-b"}],"email":"tom@miller.com","id":1,"name":"miller","street":"1st street","surname":"tom","zip":"99122"},{"active":true,"city":"Fakecity","contracts":[{"currency":"USD","id":33,"price":9.99,"type":"basic"},{"currency":"USD","id":22,"price":49.99,"type":"pro"},{"currency":"USD","id":105,"price":24.55,"type":"premium-a"}],"email":"celine@mayer.net","id":2,"name":"mayer","street":"Fakeburry Lane","surname":"celine","zip":"11443"},{"active":false,"city":"Frameworkcity","contracts":[{"currency":"USD","id":1,"price":0,"type":"free"}],"email":"sarah@delaney.com","id":3,"name":"delaney","street":"Robot Street","surname":"sarah","zip":"55678"},{"active":true,"city":"Testcity","contracts":[{"currency":"USD","id":33,"price":9.99,"type":"basic"},{"currency":"USD","id":33,"price":9.99,"type":"basic"},{"currency":"USD","id":33,"price":9.99,"type":"basic"}],"email":"sven@test.com","id":4759,"name":"Maximus","street":"Maximus Lane","surname":"Max","zip":"12345"},{"active":true,"city":"Testcity","contracts":[{"currency":"USD","id":33,"price":9.99,"type":"basic"},{"currency":"USD","id":33,"price":9.99,"type":"basic"},{"currency":"USD","id":33,"price":9.99,"type":"basic"}],"email":"sven@test.com","id":3163,"name":"Maximus","street":"Maximus Lane","surname":"Max","zip":"12345"},{"active":true,"city":"Testcity","contracts":[{"currency":"USD","id":33,"price":9.99,"type":"basic"},{"currency":"USD","id":33,"price":9.99,"type":"basic"},{"currency":"USD","id":33,"price":9.99,"type":"basic"}],"email":"sven@test.com","id":1230,"name":"Maximus","street":"Maximus Lane","surname":"Max","zip":"12345"}]}
  
  </msg>
-<msg time="2024-06-25T15:09:56.587229" level="INFO">${response} = &lt;Response [401]&gt;</msg>
+<msg time="2024-06-29T18:44:41.789380" level="INFO">${response} = &lt;Response [200]&gt;</msg>
 <var>${response}</var>
-<arg>${GLOBAL_ENDPOINT_LOGIN}</arg>
-<arg>json=${jsonBody}</arg>
-<arg>expected_status=401</arg>
-<doc>Sends a POST request.</doc>
-<status status="PASS" start="2024-06-25T15:09:56.580229" elapsed="0.007000"/>
+<arg>url=${GLOBAL_ENDPOINT_USERS}</arg>
+<arg>expected_status=200</arg>
+<arg>headers=${GLOBAL_AUTH_HEADER}</arg>
+<arg>params=${params}</arg>
+<doc>Sends a GET request.</doc>
+<status status="PASS" start="2024-06-29T18:44:41.765819" elapsed="0.023561"/>
 </kw>
 <kw name="Validate Schema" owner="validations">
 <kw name="Log To Console" owner="BuiltIn">
 <arg>Validating the JSON Schema!</arg>
 <doc>Logs the given message to the console.</doc>
-<status status="PASS" start="2024-06-25T15:09:56.589222" elapsed="0.001023"/>
+<status status="PASS" start="2024-06-29T18:44:41.792246" elapsed="0.000996"/>
 </kw>
 <kw name="Validate Json Schema" owner="json_validate_schema">
-<arg>input_json=${input_json}</arg>
-<arg>reference_schema_path=${referenceSchemaPath}</arg>
-<status status="PASS" start="2024-06-25T15:09:56.590245" elapsed="0.002963"/>
+<msg time="2024-06-29T18:44:41.802434" level="INFO">JSON doğrulama hatası: "inputJson={'users': [{'active': True, 'city': 'Testcity', 'contracts': [{'currency': 'USD', 'id': 33, 'price': 9.99, 'type': 'basic'}, {'currency': 'USD', 'id': 106, 'price': 39.99, 'type': 'premium-b'}], 'email': 'tom@miller.com', 'id': 1, 'name': 'miller', 'street': '1st street', 'surname': 'tom', 'zip': '99122'}, {'active': True, 'city': 'Fakecity', 'contracts': [{'currency': 'USD', 'id': 33, 'price': 9.99, 'type': 'basic'}, {'currency': 'USD', 'id': 22, 'price': 49.99, 'type': 'pro'}, {'currency': 'USD', 'id': 105, 'price': 24.55, 'type': 'premium-a'}], 'email': 'celine@mayer.net', 'id': 2, 'name': 'mayer', 'street': 'Fakeburry Lane', 'surname': 'celine', 'zip': '11443'}, {'active': False, 'city': 'Frameworkcity', 'contracts': [{'currency': 'USD', 'id': 1, 'price': 0, 'type': 'free'}], 'email': 'sarah@delaney.com', 'id': 3, 'name': 'delaney', 'street': 'Robot Street', 'surname': 'sarah', 'zip': '55678'}, {'active': True, 'city': 'Testcity', 'contracts': [{'currency': 'USD', 'id': 33, 'price': 9.99, 'type': 'basic'}, {'currency': 'USD', 'id': 33, 'price': 9.99, 'type': 'basic'}, {'currency': 'USD', 'id': 33, 'price': 9.99, 'type': 'basic'}], 'email': 'sven@test.com', 'id': 4759, 'name': 'Maximus', 'street': 'Maximus Lane', 'surname': 'Max', 'zip': '12345'}, {'active': True, 'city': 'Testcity', 'contracts': [{'currency': 'USD', 'id': 33, 'price': 9.99, 'type': 'basic'}, {'currency': 'USD', 'id': 33, 'price': 9.99, 'type': 'basic'}, {'currency': 'USD', 'id': 33, 'price': 9.99, 'type': 'basic'}], 'email': 'sven@test.com', 'id': 3163, 'name': 'Maximus', 'street': 'Maximus Lane', 'surname': 'Max', 'zip': '12345'}, {'active': True, 'city': 'Testcity', 'contracts': [{'currency': 'USD', 'id': 33, 'price': 9.99, 'type': 'basic'}, {'currency': 'USD', 'id': 33, 'price': 9.99, 'type': 'basic'}, {'currency': 'USD', 'id': 33, 'price': 9.99, 'type': 'basic'}], 'email': 'sven@test.com', 'id': 1230, 'name': 'Maximus', 'street': 'Maximus Lane', 'surname': 'Max', 'zip': '12345'}]}" is not of type 'object'
+
+Failed validating 'type' in schema:
+    {'$schema': 'http://json-schema.org/draft-07/schema',
+     'properties': {'users': {'items': [{'properties': {'active': {'type': 'boolean'},
+                                                        'city': {'type': 'string'},
+                                                        'contracts': {'items': [{'properties': {'currency': {'type': 'string'},
+                                                                                                'id': {'type': 'integer'},
+                                                                                                'price': {'type': 'number'},
+                                                                                                'type': {'type': 'string'}},
+                                                                                 'required': ['currency',
+                                                                                              'id',
+                                                                                              'price',
+                                                                                              'type'],
+                                                                                 'type': 'object'}],
+                                                                      'type': 'array'},
+                                                        'email': {'format': 'email',
+                                                                  'type': 'string'},
+                                                        'id': {'type': 'integer'},
+                                                        'name': {'type': 'string'},
+                                                        'street': {'type': 'string'},
+                                                        'surname': {'type': 'string'},
+                                                        'zip': {'type': 'string'}},
+                                         'required': ['active',
+                                                      'city',
+                                                      'contracts',
+                                                      'email',
+                                                      'id',
+                                                      'name',
+                                                      'street',
+                                                      'surname',
+                                                      'zip'],
+                                         'type': 'object'}],
+                              'type': 'array'}},
+     'type': 'object'}
+
+On instance:
+    ("inputJson={'users': [{'active': True, 'city': 'Testcity', "
+     "'contracts': [{'currency': 'USD', 'id': 33, 'price': 9.99, 'type': "
+     "'basic'}, {'currency': 'USD', 'id': 106, 'price': 39.99, 'type': "
+     "'premium-b'}], 'email': 'tom@miller.com', 'id': 1, 'name': 'miller', "
+     "'street': '1st street', 'surname': 'tom', 'zip': '99122'}, "
+     "{'active': True, 'city': 'Fakecity', 'contracts': [{'currency': "
+     "'USD', 'id': 33, 'price': 9.99, 'type': 'basic'}, {'currency': "
+     "'USD', 'id': 22, 'price': 49.99, 'type': 'pro'}, {'currency': 'USD', "
+     "'id': 105, 'price': 24.55, 'type': 'premium-a'}], 'email': "
+     "'celine@mayer.net', 'id': 2, 'name': 'mayer', 'street': 'Fakeburry "
+     "Lane', 'surname': 'celine', 'zip': '11443'}, {'active': False, "
+     "'city': 'Frameworkcity', 'contracts': [{'currency': 'USD', 'id': 1, "
+     "'price': 0, 'type': 'free'}], 'email': 'sarah@delaney.com', 'id': 3, "
+     "'name': 'delaney', 'street': 'Robot Street', 'surname': 'sarah', "
+     "'zip': '55678'}, {'active': True, 'city': 'Testcity', 'contracts': "
+     "[{'currency': 'USD', 'id': 33, 'price': 9.99, 'type': 'basic'}, "
+     "{'currency': 'USD', 'id': 33, 'price': 9.99, 'type': 'basic'}, "
+     "{'currency': 'USD', 'id': 33, 'price': 9.99, 'type': 'basic'}], "
+     "'email': 'sven@test.com', 'id': 4759, 'name': 'Maximus', 'street': "
+     "'Maximus Lane', 'surname': 'Max', 'zip': '12345'}, {'active': True, "
+     "'city': 'Testcity', 'contracts': [{'currency': 'USD', 'id': 33, "
+     "'price': 9.99, 'type': 'basic'}, {'currency': 'USD', 'id': 33, "
+     "'price': 9.99, 'type': 'basic'}, {'currency': 'USD', 'id': 33, "
+     "'price': 9.99, 'type': 'basic'}], 'email': 'sven@test.com', 'id': "
+     "3163, 'name': 'Maximus', 'street': 'Maximus Lane', 'surname': 'Max', "
+     "'zip': '12345'}, {'active': True, 'city': 'Testcity', 'contracts': "
+     "[{'currency': 'USD', 'id': 33, 'price': 9.99, 'type': 'basic'}, "
+     "{'currency': 'USD', 'id': 33, 'price': 9.99, 'type': 'basic'}, "
+     "{'currency': 'USD', 'id': 33, 'price': 9.99, 'type': 'basic'}], "
+     "'email': 'sven@test.com', 'id': 1230, 'name': 'Maximus', 'street': "
+     "'Maximus Lane', 'surname': 'Max', 'zip': '12345'}]}")</msg>
+<arg>${input_json}</arg>
+<arg>${referenceSchemaPath}</arg>
+<status status="PASS" start="2024-06-29T18:44:41.793242" elapsed="0.011189"/>
 </kw>
-<arg>input_json=${response.json()}</arg>
-<arg>referenceSchemaPath=${GLOBAL_SCHEMA_ERROR}</arg>
-<status status="PASS" start="2024-06-25T15:09:56.588228" elapsed="0.006521"/>
+<arg>inputJson=${response.json()}</arg>
+<arg>referenceSchemaPath=${GLOBAL_SCHEMA_USERS}</arg>
+<status status="PASS" start="2024-06-29T18:44:41.790277" elapsed="0.014154"/>
 </kw>
-<arg>guest</arg>
-<arg>wrongPass</arg>
-<status status="PASS" start="2024-06-25T15:09:56.575697" elapsed="0.019436"/>
-</kw>
-<status status="PASS" start="2024-06-25T15:09:56.574692" elapsed="0.020948"/>
+<status status="PASS" start="2024-06-29T18:44:41.762438" elapsed="0.041993"/>
 </test>
-<status status="PASS" start="2024-06-25T15:09:56.026985" elapsed="0.570848"/>
+<status status="PASS" start="2024-06-29T18:44:41.193454" elapsed="0.613475"/>
 </suite>
 <statistics>
 <total>
-<stat pass="4" fail="0" skip="0">All Tests</stat>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
 </total>
 <tag>
 </tag>
 <suite>
-<stat pass="4" fail="0" skip="0" id="s1" name="Verify Login Wrong Auth">Verify Login Wrong Auth</stat>
+<stat pass="1" fail="0" skip="0" id="s1" name="Verify Get Users">Verify Get Users</stat>
 </suite>
 </statistics>
 <errors>
+<msg time="2024-06-29T18:44:41.365179" level="WARN">Error in file 'c:\Users\Bilgin\Projeler\udemy_api_tests\keywords\setupTeardowns.robot' on line 41: The '[Return]' setting is deprecated. Use the 'RETURN' statement instead.</msg>
+<msg time="2024-06-29T18:44:41.365179" level="WARN">Error in file 'c:\Users\Bilgin\Projeler\udemy_api_tests\keywords\setupTeardowns.robot' on line 46: The '[Return]' setting is deprecated. Use the 'RETURN' statement instead.</msg>
 </errors>
 </robot>
